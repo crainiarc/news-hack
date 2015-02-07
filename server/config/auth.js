@@ -13,7 +13,7 @@ var config = {
   },
 
   pyscript: "classifier.py",
-  pyscriptpath: "/home/chunmun/git/news-hack/server/classifier/",
+  pyscriptpath: "/classifier/",
 
   appUrl : "http://localhost:9000",
   postLimit : 250,

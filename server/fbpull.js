@@ -9,7 +9,7 @@ var options = {
   mode: 'text',
   pythonPath: '/usr/bin/python',
   pythonOptions: ['-u'],
-  scriptPath: config.pyscriptpath,
+  scriptPath: __dirname+config.pyscriptpath,
   args: []
 };
 
@@ -29,7 +29,6 @@ var pulldata = function(urls, fb, alldata, res, done) {
         }
       });
 
-      /*
       if (data.hasOwnProperty('paging') &&
         data.paging.hasOwnProperty('next')) {
         urls.unshift(data.paging.next);
@@ -38,9 +37,9 @@ var pulldata = function(urls, fb, alldata, res, done) {
 
       } else if (urls.length > 0) {
         pulldata(urls, fb, alldata, res, done);
-      } else {*/
+      } else {
         done(alldata, res);
-      //}
+      }
     }
   });
 
@@ -65,20 +64,9 @@ var fbpull = function(user, res) {
     secret: config.facebookAuth.appSecret
   }).setAccessToken(user.facebook.token);
   var urls = [
-    '/v2.2/me/home?limit=1000&since=2014-01-01',
-    '/v2.2/me/home?limit=1000&since=2014-02-01',
-    '/v2.2/me/home?limit=1000&since=2014-03-01',
-    '/v2.2/me/home?limit=1000&since=2014-04-01',
-    '/v2.2/me/home?limit=1000&since=2014-05-01',
-    '/v2.2/me/home?limit=1000&since=2014-06-01',
-    '/v2.2/me/home?limit=1000&since=2014-07-01',
-    '/v2.2/me/home?limit=1000&since=2014-08-01',
-    '/v2.2/me/home?limit=1000&since=2014-09-01',
-    '/v2.2/me/home?limit=1000&since=2014-10-01',
-    '/v2.2/me/home?limit=1000&since=2014-11-01',
-    '/v2.2/me/home?limit=1000&since=2014-12-01',
     '/v2.2/me/home?limit=1000&since=2015-01-01'
   ];
+  console.log(options);
 
   var alldata = pulldata(urls, fb, {}, res,
     function(alldata, res) {
@@ -96,7 +84,7 @@ var fbpull = function(user, res) {
         // console.log('results: %j', results);
 
         res.json(results);
-      }
+      };
 
       PythonShell.run(config.pyscript, options, f);
     });
