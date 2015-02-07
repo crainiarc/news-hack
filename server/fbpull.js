@@ -82,7 +82,11 @@ var fbpull = function(user, res) {
         if (err) { console.log(err);}
         // results is an array consisting of messages collected during execution 
         console.log('results: %j', results);
-        res.json(results);
+        var resObj = {};
+        results.forEach(function(obj) {
+          resObj[obj.id] = obj;
+        });
+        res.json(resObj);
       };
 
       PythonShell.run(config.pyscript, options, f);
