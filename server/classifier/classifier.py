@@ -164,6 +164,14 @@ def classify(filename):
 
   return buckets
 
+def upgrade_img_res():
+  global posts
+  # Update images
+  for k in posts:
+    post = posts[k]
+    if "picture" in post and "url=" in post["picture"]:
+      post["picture"] = post["picture"].split("url=")[1]
+
 def run_cmd(cmd):
   print(cmd)
   subprocess.call(cmd)
@@ -174,6 +182,8 @@ def clean(s):
 def main(filename):
   get_keywords_from_file()
   buckets = classify(filename)
+  upgrade_img_res()
+
   to_print = ""
   # Print top 5 posts in each bucket
   tag = ['asia', 'trending', 'technology', 'gaming', 'entertainment', 'business', 'sports', 'birthdays']

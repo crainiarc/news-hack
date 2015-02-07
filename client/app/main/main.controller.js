@@ -50,6 +50,15 @@ angular.module('newsHackApp')
               };
               categoryPosts[categoryArr[i]].push(currentPost);
             }
+            if (arrayLength == 0) {
+              if (categories.hasOwnProperty('Others')) {
+                categories['Others'] = categories['Others'] + 1;
+              } else {
+                categories['Others'] = 1;
+                categoryPosts['Others'] = [];
+              };
+              categoryPosts['Others'].push(currentPost);
+            };
             
           };
         }
@@ -90,6 +99,13 @@ angular.module('newsHackApp')
               }
               $scope.categoryPosts[categoryArr[i]].unshift(currentPost);
             }
+            if (arrayLength == 0) {
+              if ($scope.categories.indexOf("Others") <= -1) {
+                $scope.categories.push("Others");
+                $scope.categoryPosts["Others"] = [];
+              }
+              $scope.categoryPosts["Others"].unshift(currentPost);
+            };
             
           };
         }
