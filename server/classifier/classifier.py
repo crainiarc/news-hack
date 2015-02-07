@@ -1,4 +1,4 @@
-import json, sys, subprocess, glob, math, datetime, os, random
+import json, sys, subprocess, glob, math, datetime, os, random, urllib.parse
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
@@ -170,7 +170,8 @@ def upgrade_img_res():
   for k in posts:
     post = posts[k]
     if "picture" in post and "url=" in post["picture"]:
-      new_link = post["picture"].split("url=")[1].replace('%3A',':').replace('%2F','/')
+      new_link = post["picture"].split("url=")[1]
+      new_link = urllib.parse.unquote(new_link)
       post["picture"] = new_link
 
 def run_cmd(cmd):
