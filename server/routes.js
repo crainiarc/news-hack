@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
 
   // handle the callback after facebook has authenticated the user
   app.get('/auth/facebook/callback',passport.authenticate('facebook', {
-    successRedirect : '/profile',
+    successRedirect : '/#/newsfeed',
     failureRedirect : '/'
   }));
 
@@ -52,9 +52,10 @@ module.exports = function(app, passport) {
     });
   });
 
+
   // FB data pull -------------------------------------------------------------
 
-  app.get('/pullmoidata', function(req, res) {
+  app.get('/feed', function(req, res) {
     fbpull(req.user, res);
   });
 

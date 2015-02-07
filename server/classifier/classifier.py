@@ -1,18 +1,17 @@
-from sets import Set
 import json, sys, subprocess, glob, math, datetime, os, random
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
-keywords_asia = Set([])
-keywords_trending = Set([])
-keywords_scitech = Set([])
-keywords_game = Set([])
-keywords_entertainment = Set([])
-keywords_biz = Set([])
-keywords_sports = Set([])
-keywords_others = Set([])
+keywords_asia = set()
+keywords_trending = set()
+keywords_scitech = set()
+keywords_game = set()
+keywords_entertainment = set()
+keywords_biz = set()
+keywords_sports = set()
+keywords_others = set()
 
 keywords_bucket = []
 keywords_bucket.append(keywords_asia)
@@ -80,7 +79,7 @@ def get_keywords_from_file():
 
 def classify(filename):
 	global posts, text_data
-	seen_text = Set([])
+	seen_text = set()
 
 	# Set up buckets
 	buckets = {}
@@ -163,11 +162,11 @@ def classify(filename):
 	return buckets
 
 def run_cmd(cmd):
-	print cmd
+	print(cmd)
 	subprocess.call(cmd)
 
 def clean(s):
-	return s.encode('ascii','ignore').replace('\n','').replace('\r','').replace('"',"").replace("'","")
+	return s.replace('\n','').replace('\r','').replace('"',"").replace("'","")
 
 def main(filename):
 	get_keywords_from_file()
@@ -175,6 +174,7 @@ def main(filename):
 	to_print = ""
 	# Print top 5 posts in each bucket
 	tag = ['asia', 'trending', 'science_and_technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
+	print_arr = []
 	for i in range(0, num_buckets):
 		# print "============"
 		# print "Bucket " + str(i) + " [" + tag[i].upper() + "]"
@@ -190,9 +190,10 @@ def main(filename):
 			post = posts[buckets[i][j][0]]
 			post["category"] = tag[i].upper()
 			post["importance"] = random.randint(1,3)
-			to_print += " " + str(post)
+			print_arr.append(str(post))
 			j += 1
-	print to_print
+	to_print = "[" + ",".join(print_arr)+"]";
+	print(to_print)
 
 	return [buckets, posts]
 

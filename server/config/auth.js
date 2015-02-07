@@ -12,6 +12,9 @@ var config = {
     scope : [ "email", "user_status", "user_friends", "read_stream"]
   },
 
+  pyscript: "classifier.py",
+  pyscriptpath: "/classifier/",
+
   appUrl : "http://localhost:9000",
   postLimit : 250,
 

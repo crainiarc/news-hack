@@ -20,7 +20,8 @@
     "passport": "~0.2.1",
     "facebook-node-sdk": "~0.2.0",
     "passport-facebook": "~1.0.3",
-    "bcrypt-nodejs": "0.0.3"
+    "bcrypt-nodejs": "0.0.3",
+    "python-shell": "0.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
