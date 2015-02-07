@@ -17,12 +17,13 @@
 
     <packery-object class="item-lg" ng-repeat="post in categoryPosts[category]" ng-class="post.importance == 1 ? 'item-sm' : (post.importance == 2 ? 'item-md' : 'item-lg')" >
       <section class="item-container">
-        <img src="{{post.picture}}" />
-        <h1>{{post.name}}</h1>
-        <p>{{post.description}}</p>
+        <img src="{{post.picture}}" ng-if="post.hasOwnProperty('picture')"/>
+        <h1 ng-if="post.hasOwnProperty('name')">{{post.name}}</h1>
+        
+        <p ng-if="post.hasOwnProperty('description')">{{post.description}}</p>
+        <p ng-if="!post.hasOwnProperty('description') && post.hasOwnProperty('message')">{{post.message}}</p>
       </section>
     </packery-object>
-
   </packery>
 <div>
 
