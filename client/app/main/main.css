@@ -1,5 +1,5 @@
 body {
-    background-color: #FFFFFF;
+    /*background-color: #FFFFFF;*/
     /*background-color: #E9EAED;*/
 }
 
@@ -11,13 +11,14 @@ body {
 .navbar { margin-bottom: 0; }
 .navbar-nav > li > a:link,
 .navbar-nav > li > a:visited {
-    font: bold 12px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: bold 15px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #333333;
 }
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:active {
     color: #4860A2;
+    background: #fff;
 }
 
 .packery-sizer, .packery-object {
