@@ -59,7 +59,12 @@ body {
     font: 13px/1.3em 'Georgia', 'Times New Roman', Times, serif;
 }
 
-.item-container img {
+.item-container .poster-pic {
+    width: 32px;
+    height: auto;
+}
+
+.item-container > img {
     width: 100%;
     height: auto;
 }
