@@ -5,56 +5,23 @@
 <div class="container">
   <nav class="navbar">
     <ul class="nav navbar-nav">
-      <li><a class="category-selector" href="#">Headlines</a></li>
-      <li><a href="#">Local News</a></li>
+      <li  ng-repeat="category in categories"><a class="category-selector" href="#" ng-click="changeCurrentCategory(category);">{{category}}</a></li>
+      <!-- <li><a href="#">Local News</a></li>
       <li><a href="#">Sports</a></li>
-      <li><a href="#">Others</a></li>
+      <li><a href="#">Others</a></li> -->
     </ul>
   </nav>
 </div>
 <div class="container">
-  <packery class="col-lg-12" gutter="10" column-width="0" row-height="0">
+  <packery class="col-lg-12" gutter="10" column-width="0" row-height="0" ng-repeat="category in categories" ng-if="category == currentCategory">
 
-    <packery-object class="item-lg">
+    <packery-object class="item-lg" ng-repeat="post in categoryPosts[category]" ng-class="post.importance == 1 ? 'item-sm' : (post.importance == 2 ? 'item-md' : 'item-lg')" >
       <section class="item-container">
-        <img src="http://static01.nyt.com/images/2015/02/07/world/JP-HUMANITARIAN-1/JP-HUMANITARIAN-1-largeHorizontal375.jpg" />
-        <h1>ISIS Declares Jordanian Airstrike Killed a U.S. Hostage</h1>
-        <p>The Islamic State said Friday that Jordanian bombings in Syria intended to avenge the immolation of a captured
-          pilot had killed an American hostage, Kayla Mueller, who was held by the group.</p>
+        <img src="{{post.picture}}" />
+        <h1>{{post.name}}</h1>
+        <p>{{post.description}}</p>
       </section>
     </packery-object>
-
-    <packery-object class="item-md">
-      <section class="item-container">
-        <h1>Shivering and Tearful in Rebel-Held Ukraine</h1>
-        <p>A new separatist offensive and the government’s push to isolate the rebel region are intensifying humanitarian
-          problems as the fiercest winter weeks arrive on the Ukrainian steppe.</p>
-      </section>
-  </packery-object>
-
-  <packery-object class="item-sm">
-    <section class="item-container">
-    <h1>Can New York Be Affordable again?</h1>
-    <p>Mayor Bill de Blasio’s mission to create housing for all, including working- and middle-class families, is timely
-    and exciting.</p>
-    </section>
-  </packery-object>
-
-  <packery-object class="item-sm">
-    <section class="item-container">
-      <h1>Worry About Bubonic Plague in Subway? Probably Not</h1>
-      <p>New York health officials contested a finding by researchers who said they had discovered in stations evidence of
-      the deadly disease that ravaged 14th-century Europe.</p>
-    </section>
-  </packery-object>
-
-  <packery-object class="item-md">
-    <section class="item-container">
-      <h1>Falling Marriage Rates Show Economic Divides</h1>
-      <p>Those who are not married — now about half of U.S. households — tend to have less wealth, making the
-        married-unmarried divide one more dimension of America’s growing inequality.</p>
-    </section>
-  </packery-object>
 
   </packery>
 <div>
