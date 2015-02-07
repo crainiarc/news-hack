@@ -53,6 +53,12 @@ module.exports = function(app, passport) {
   });
 
 
+  app.get('/cache', function(req, res) {
+    var fs = require('fs');
+    var jsonObj = fs.readFileSync(__dirname+"/classifier/cache.json", "utf8");
+    res.json(jsonObj);
+  });
+
   // FB data pull -------------------------------------------------------------
 
   app.get('/feed', function(req, res) {
