@@ -7,10 +7,10 @@ angular.module('newsHackApp')
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
-
     $http.get('/feed').success(function(feedObj) {
-      console.log("Returned json " + feedObj);
-      json = JSON.parse(feedObj)
+      
+      var json = angular.fromJson(feedObj);
+      console.log("Returned json " + json);
       $scope.validatePost = function(post) {
         var contentCount = 0;
         if (post.hasOwnProperty('picture')) {
@@ -36,41 +36,41 @@ angular.module('newsHackApp')
       // });
       var categories = [];
       var categoryPosts = [];
-      // for (var key in json) {
-      //   if (json.hasOwnProperty(key)) {
-      //     console.log("Key is " + key);
-      //     var currentPost = json[key];
-      //     if ($scope.validatePost(currentPost)) {
-      //       var category = currentPost.category;
-      //       if (categories.hasOwnProperty(category)) {
-      //         categories[category] = categories[category] + 1;
-      //       } else {
-      //         categories[category] = 1;
-      //         categoryPosts[category] = [];
-      //       };
+      for (var key in json) {
+        if (json.hasOwnProperty(key)) {
+          //console.log("Key is " + key);
+          var currentPost = json[key];
+          if ($scope.validatePost(currentPost)) {
+            var category = currentPost.category;
+            if (categories.hasOwnProperty(category)) {
+              categories[category] = categories[category] + 1;
+            } else {
+              categories[category] = 1;
+              categoryPosts[category] = [];
+            };
 
-      //       categoryPosts[category].push(currentPost);
-      //     };
-          
-      //   }
-      // }
-
-      for (var currentPost in json) {
-        //console.log("Current post message is " + currentPost);
-        if ($scope.validatePost(currentPost)) {
-          console.log("validated");
-          var category = currentPost.category;
-          if (categories.hasOwnProperty(category)) {
-            categories[category] = categories[category] + 1;
-          } else {
-            categories[category] = 1;
-            categoryPosts[category] = [];
+            categoryPosts[category].push(currentPost);
           };
-
-          categoryPosts[category].push(currentPost);
-        } else {
+          
         }
       }
+
+      // for (var currentPost in json) {
+      //   //console.log("Current post message is " + currentPost);
+      //   if ($scope.validatePost(currentPost)) {
+      //     console.log("validated");
+      //     var category = currentPost.category;
+      //     if (categories.hasOwnProperty(category)) {
+      //       categories[category] = categories[category] + 1;
+      //     } else {
+      //       categories[category] = 1;
+      //       categoryPosts[category] = [];
+      //     };
+
+      //     categoryPosts[category].push(currentPost);
+      //   } else {
+      //   }
+      // }
       var sortCategory = function() {
         for (var key in categories) {
           if (categories.hasOwnProperty(key)) {
