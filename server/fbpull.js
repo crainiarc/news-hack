@@ -7,7 +7,7 @@ var path = require('path');
 var PythonShell = require('python-shell');
 var options = {
   mode: 'text',
-  pythonPath: '/usr/bin/python',
+  pythonPath: 'python3',
   pythonOptions: ['-u'],
   scriptPath: __dirname+config.pyscriptpath,
   args: []
@@ -81,8 +81,7 @@ var fbpull = function(user, res) {
       var f = function (err, results) {
         if (err) { console.log(err);}
         // results is an array consisting of messages collected during execution 
-        // console.log('results: %j', results);
-
+        console.log('results: %j', results);
         res.json(results);
       };
 
