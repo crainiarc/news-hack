@@ -8,6 +8,7 @@ body {
     height: 42px;
     position: fixed;
     z-index: 100;
+    width: 100%;
 }
 
 

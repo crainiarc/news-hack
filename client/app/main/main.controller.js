@@ -25,7 +25,9 @@ angular.module('newsHackApp')
       return contentCount >= 2;
     }
 
+
     $scope.loadPage = function (feedObj) {
+      $scope.currentCategory = "";
       $scope.json = JSON.parse(feedObj);
       $scope.categories = [];
       $scope.categoryPosts = [];
@@ -65,13 +67,27 @@ angular.module('newsHackApp')
       $scope.changeCurrentCategory = function(currentCategory) {
         $scope.currentCategory = currentCategory;
       };
-      
     }
 
     $http.get('/feed').success(function(feedObj) {
-      //$scope.changeCurrentCategory($scope.categories[1]);
-      $scope.loadPage(feedObj);
-      $scope.changeCurrentCategory($scope.categories[1]);
+      $scope.json = JSON.parse(feedObj);
+      for (var key in $scope.json) {
+        if ($scope.json.hasOwnProperty(key)) {
+          //console.log("Key is " + key);
+          var currentPost = $scope.json[key];
+          if ($scope.validatePost(currentPost)) {
+            var category = currentPost.category;
+            if ($scope.categories.indexOf(category) <= -1) {
+              $scope.categories.push(category);
+              $scope.categoryPosts[category] = [];
+            } else {
+              console.log("New post in category " + category);
+            }
+            $scope.categoryPosts[category].unshift(currentPost);
+          };
+        }
+      }
+      $scope.$apply();
     });
 
     $http.get('/cache').success(function(feedObj) {
