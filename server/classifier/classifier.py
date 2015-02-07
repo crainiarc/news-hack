@@ -1,5 +1,5 @@
 from sets import Set
-import json, sys, subprocess, glob, math, datetime, os
+import json, sys, subprocess, glob, math, datetime, os, random
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
@@ -172,6 +172,7 @@ def clean(s):
 def main(filename):
 	get_keywords_from_file()
 	buckets = classify(filename)
+	to_print = ""
 	# Print top 5 posts in each bucket
 	tag = ['asia', 'trending', 'science_and_technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
 	for i in range(0, num_buckets):
@@ -184,12 +185,14 @@ def main(filename):
 		# 	print x
 		# 	print text[post_id]
 		# 	print "---------------------"
-		to_print = tag[i].upper()
 		j = 0
 		while j < len(buckets[i]) and buckets[i][j][1] > 0:
-			to_print += " " + buckets[i][j][0]
+			post = posts[buckets[i][j][0]]
+			post["category"] = tag[i].upper()
+			post["importance"] = random.randint(1,3)
+			to_print += " " + str(post)
 			j += 1
-		print to_print
+	print to_print
 
 	return [buckets, posts]
 
