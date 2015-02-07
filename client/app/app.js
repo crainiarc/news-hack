@@ -5,7 +5,8 @@ angular.module('newsHackApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angular-packery'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
