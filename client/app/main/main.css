@@ -34,7 +34,6 @@ body {
     width: 530px;
 }
 
-
 .item-md {
     width: 250px;
 }
@@ -45,6 +44,7 @@ body {
 
 .item-container {
     margin: 5px;
+    word-wrap: break-word;
 }
 
 .item-container h1 {
