@@ -4,7 +4,7 @@ body {
 }
 
 .fb-bar {
-    background-color: #4860A2;
+    background-color: rgb(59,89,153);
     height: 42px;
 }
 
@@ -67,4 +67,11 @@ body {
 .item-container > img {
     width: 100%;
     height: auto;
+}
+
+.header-content {
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
 }
