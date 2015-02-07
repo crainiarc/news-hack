@@ -44,9 +44,21 @@ body {
 }
 
 .item-container h1 {
+    margin-bottom: 0;
     font: 21px/1.3em 'Georgia', 'Times New Roman', Times, serif;
+}
+
+.item-container h2 {
+    margin-top: 5px;
+    font: 13px/1.3em 'Georgia', 'Times New Roman', Times, serif;
+    text-align: right;
 }
 
 .item-container p {
     font: 13px/1.3em 'Georgia', 'Times New Roman', Times, serif;
+}
+
+.item-container img {
+    width: 100%;
+    height: auto;
 }
