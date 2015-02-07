@@ -173,7 +173,7 @@ def main(filename):
 	buckets = classify(filename)
 	to_print = ""
 	# Print top 5 posts in each bucket
-	tag = ['asia', 'trending', 'science_and_technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
+	tag = ['asia', 'trending', 'technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
 	print_arr = {}
 	for i in range(0, num_buckets):
 		# print "============"
