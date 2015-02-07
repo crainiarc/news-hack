@@ -100,7 +100,7 @@ def classify(filename):
 			obj_id = obj["id"]
 			
 			# Extract text from post
-			msg, comments, name, desc = "", "", "", ""
+			msg, name, desc = "", "", ""
 			if "message" in obj:
 				msg = clean(obj["message"]) + " "
 			if "name" in obj:
@@ -119,6 +119,10 @@ def classify(filename):
 			text[obj_id] = text_data
 			seen_text.add(text_data)
 		
+			# Manual pruning
+			if "myat" in text_data:
+				continue
+
 			# Assign post to bucket
 			if "birthday" in text_data or "bday" in text_data:
 				# "updated_time":"2015-02-07T14:56:17+0000"
@@ -138,11 +142,17 @@ def classify(filename):
 				larger_num = max(num_shares, num_likes)
 				buckets[1].append([obj_id, float(larger_num)/len(text_data), len(text_data), larger_num])
 
+				
+
 				# Count keywords and add to buckets
 				for i in range(0, num_buckets):
 					for w in keywords_bucket[i]:
 						if w in text_data:
 							bucket_count[i] += 1
+							# For non-tech (i != 2), grab caption as well (because caption may contain "facebook" and screw up tech counters)
+							if i != 2:
+								if "caption" in obj and w in clean(obj["caption"]):
+									bucket_count[i] += 5
 					buckets[i].append([obj_id, float(bucket_count[i])/len(text_data), len(text_data), bucket_count[i]])
 				
 	# Sort importance
@@ -163,17 +173,23 @@ def main(filename):
 	get_keywords_from_file()
 	buckets = classify(filename)
 	# Print top 5 posts in each bucket
-	tag = ['asia', 'trending', 'sci & tech', 'game', 'entertainment', 'business', 'sports', 'others']
+	tag = ['asia', 'trending', 'science_and_technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
 	for i in range(0, num_buckets):
-		print "============"
-		print "Bucket " + str(i) + " [" + tag[i].upper() + "]"
-		print "============"
-		top5 = buckets[i][0:5]
-		for x in top5:
-			post_id = x[0]
-			print x
-			print text[post_id]
-			print "---------------------"
+		# print "============"
+		# print "Bucket " + str(i) + " [" + tag[i].upper() + "]"
+		# print "============"
+		# top5 = buckets[i][0:5]
+		# for x in top5:
+		# 	post_id = x[0]
+		# 	print x
+		# 	print text[post_id]
+		# 	print "---------------------"
+		to_print = tag[i].upper()
+		j = 0
+		while j < len(buckets[i]) and buckets[i][j][1] > 0:
+			to_print += " " + buckets[i][j][0]
+			j += 1
+		print to_print
 
 	return [buckets, posts]
 
