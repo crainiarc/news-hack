@@ -4,14 +4,14 @@ abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
-keywords_asia = set()
-keywords_trending = set()
-keywords_scitech = set()
-keywords_game = set()
-keywords_entertainment = set()
-keywords_biz = set()
-keywords_sports = set()
-keywords_others = set()
+keywords_asia = set() #0
+keywords_trending = set() #1
+keywords_scitech = set() #2
+keywords_game = set() #3
+keywords_entertainment = set() #4
+keywords_biz = set() #5
+keywords_sports = set() #6
+keywords_birthday = set() #7
 
 keywords_bucket = []
 keywords_bucket.append(keywords_asia)
@@ -21,7 +21,7 @@ keywords_bucket.append(keywords_game)
 keywords_bucket.append(keywords_entertainment)
 keywords_bucket.append(keywords_biz)
 keywords_bucket.append(keywords_sports)
-keywords_bucket.append(keywords_others)
+keywords_bucket.append(keywords_birthday)
 
 num_buckets = len(keywords_bucket)
 posts = {}
@@ -109,6 +109,10 @@ def classify(filename):
       text_data = msg + name + desc
       text_data = text_data.lower()
 
+      # Manual prune
+      if "myat" in text_data:
+        continue
+
       # Capture post
       if (len(text_data) == 0
         or text_data in seen_text
@@ -120,16 +124,12 @@ def classify(filename):
       text[obj_id] = text_data
       seen_text.add(text_data)
     
-      # Manual pruning
-      if "myat" in text_data:
-        continue
-
       # Assign post to bucket
       if "birthday" in text_data or "bday" in text_data:
         # "updated_time":"2015-02-07T14:56:17+0000"
         date_string = obj["updated_time"]
         time_stamp = int(datetime.datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%S+0000').strftime('%s'))
-        buckets[num_buckets-1].append([obj_id, time_stamp, len(text_data), time_stamp])
+        buckets[7].append([obj_id, time_stamp, len(text_data), time_stamp])
       else:
         # Add to 'trending' if shared/liked a lot.
         num_shares = 0
@@ -145,6 +145,8 @@ def classify(filename):
 
         # Count keywords and add to buckets
         for i in range(0, num_buckets):
+          if i == 1 or i == 7: # Skip trending and birthdays
+            continue
           for w in keywords_bucket[i]:
             if w in text_data:
               bucket_count[i] += 1
@@ -152,10 +154,11 @@ def classify(filename):
               if i != 2:
                 if "caption" in obj and w in clean(obj["caption"]):
                   bucket_count[i] += 5
-          buckets[i].append([obj_id, float(bucket_count[i])/len(text_data), len(text_data), bucket_count[i]])
+          score = float(bucket_count[i])/len(text_data)
+          buckets[i].append([obj_id, score, len(text_data), bucket_count[i]])
         
   # Sort importance
-  # Items are [post id, ratio/score, length of text_data, max count]
+  # Items are [post id, score, length of text_data, max count]
   for i in range(0, num_buckets):
     buckets[i] = sorted(buckets[i], key=lambda x: x[1], reverse=True)
 
@@ -173,18 +176,18 @@ def main(filename):
   buckets = classify(filename)
   to_print = ""
   # Print top 5 posts in each bucket
-  tag = ['asia', 'trending', 'technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
+  tag = ['asia', 'trending', 'technology', 'gaming', 'entertainment', 'business', 'sports', 'birthdays']
   print_arr = {}
   for i in range(0, num_buckets):
-    # print "============"
-    # print "Bucket " + str(i) + " [" + tag[i].upper() + "]"
-    # print "============"
+    # print ("============")
+    # print ("Bucket " + str(i) + " [" + tag[i].upper() + "]")
+    # print ("============")
     # top5 = buckets[i][0:5]
     # for x in top5:
     #   post_id = x[0]
-    #   print x
-    #   print text[post_id]
-    #   print "---------------------"
+    #   print (x)
+    #   print (text[post_id])
+    #   print ("---------------------")
     j = 0
     while j < len(buckets[i]) and buckets[i][j][1] > 0:
       post = posts[buckets[i][j][0]]
