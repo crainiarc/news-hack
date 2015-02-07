@@ -8,6 +8,11 @@ angular.module('newsHackApp', [
   'ui.bootstrap',
   'angular-packery'
 ])
+  .filter('capitalize', function() {
+    return function(input, all) {
+      return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+  })
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/auth/facebook', {
