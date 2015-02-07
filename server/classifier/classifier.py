@@ -192,7 +192,7 @@ def main(filename):
 			post["importance"] = random.randint(1,3)
 			print_arr[post["id"]] = post
 			j += 1
-	print(print_arr)
+	print(json.dumps(print_arr))
 
 	return [buckets, posts]
 
