@@ -7,10 +7,10 @@ angular.module('newsHackApp')
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
+
     $http.get('/feed').success(function(feedObj) {
-      
-      var json = angular.fromJson(feedObj);
-      console.log("Returned json " + json);
+      //console.log("Returned second json " + json[0]);
+      var json = JSON.parse(feedObj);
       $scope.validatePost = function(post) {
         var contentCount = 0;
         if (post.hasOwnProperty('picture')) {
@@ -51,7 +51,6 @@ angular.module('newsHackApp')
 
             categoryPosts[category].push(currentPost);
           };
-          
         }
       }
 
