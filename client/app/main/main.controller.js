@@ -8,38 +8,36 @@ angular.module('newsHackApp')
       $scope.awesomeThings = awesomeThings;
     });
 
-    $http.get('/cache').success(function(feedObj) {
-      //console.log("Returned second json " + json[0]);
-      var json = JSON.parse(feedObj);
-      $scope.validatePost = function(post) {
-        var contentCount = 0;
-        if (post.hasOwnProperty('picture')) {
-          contentCount ++;
-        };
+    $scope.validatePost = function(post) {
+      var contentCount = 0;
+      if (post.hasOwnProperty('picture')) {
+        contentCount ++;
+      };
 
-        if (post.hasOwnProperty('name')) {
-          contentCount ++;
-        };
+      if (post.hasOwnProperty('name')) {
+        contentCount ++;
+      };
 
-        if (post.hasOwnProperty('description') || post.hasOwnProperty('message')) {
-          contentCount ++;
-        };
+      if (post.hasOwnProperty('description') || post.hasOwnProperty('message')) {
+        contentCount ++;
+      };
 
-        return contentCount >= 2;
-      }
+      return contentCount >= 2;
+    }
 
+
+    $scope.loadPage = function (feedObj) {
+      $scope.currentCategory = "";
+      $scope.json = JSON.parse(feedObj);
       $scope.categories = [];
       $scope.categoryPosts = [];
       console.log("testing!");
-      // $.getJSON("./test.json", function(json) {
-      //   console.log(json); // this will show the info it in firebug console
-      // });
       var categories = [];
       var categoryPosts = [];
-      for (var key in json) {
-        if (json.hasOwnProperty(key)) {
+      for (var key in $scope.json) {
+        if ($scope.json.hasOwnProperty(key)) {
           //console.log("Key is " + key);
-          var currentPost = json[key];
+          var currentPost = $scope.json[key];
           if ($scope.validatePost(currentPost)) {
             var category = currentPost.category;
             if (categories.hasOwnProperty(category)) {
@@ -53,23 +51,6 @@ angular.module('newsHackApp')
           };
         }
       }
-
-      // for (var currentPost in json) {
-      //   //console.log("Current post message is " + currentPost);
-      //   if ($scope.validatePost(currentPost)) {
-      //     console.log("validated");
-      //     var category = currentPost.category;
-      //     if (categories.hasOwnProperty(category)) {
-      //       categories[category] = categories[category] + 1;
-      //     } else {
-      //       categories[category] = 1;
-      //       categoryPosts[category] = [];
-      //     };
-
-      //     categoryPosts[category].push(currentPost);
-      //   } else {
-      //   }
-      // }
       var sortCategory = function() {
         for (var key in categories) {
           if (categories.hasOwnProperty(key)) {
@@ -82,10 +63,36 @@ angular.module('newsHackApp')
       };
       sortCategory();
       $scope.categoryPosts = categoryPosts;
-      $scope.currentCategory = $scope.categories[0];
+      //$scope.currentCategory = "";
       $scope.changeCurrentCategory = function(currentCategory) {
         $scope.currentCategory = currentCategory;
       };
+    }
+
+    $http.get('/feed').success(function(feedObj) {
+      $scope.json = JSON.parse(feedObj);
+      for (var key in $scope.json) {
+        if ($scope.json.hasOwnProperty(key)) {
+          //console.log("Key is " + key);
+          var currentPost = $scope.json[key];
+          if ($scope.validatePost(currentPost)) {
+            var category = currentPost.category;
+            if ($scope.categories.indexOf(category) <= -1) {
+              $scope.categories.push(category);
+              $scope.categoryPosts[category] = [];
+            } else {
+              console.log("New post in category " + category);
+            }
+            $scope.categoryPosts[category].unshift(currentPost);
+          };
+        }
+      }
+      $scope.$apply();
+    });
+
+    $http.get('/cache').success(function(feedObj) {
+      $scope.loadPage(feedObj);
+      $scope.changeCurrentCategory($scope.categories[0]);
     });
 
     $scope.addThing = function() {
