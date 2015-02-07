@@ -174,6 +174,7 @@ def main(filename):
 	to_print = ""
 	# Print top 5 posts in each bucket
 	tag = ['asia', 'trending', 'science_and_technology', 'gaming', 'entertainment', 'business', 'sports', 'others']
+	print_arr = []
 	for i in range(0, num_buckets):
 		# print "============"
 		# print "Bucket " + str(i) + " [" + tag[i].upper() + "]"
@@ -189,8 +190,9 @@ def main(filename):
 			post = posts[buckets[i][j][0]]
 			post["category"] = tag[i].upper()
 			post["importance"] = random.randint(1,3)
-			to_print += " " + str(post)
+			print_arr.append(str(post))
 			j += 1
+	to_print = "[" + ",".join(print_arr)+"]";
 	print(to_print)
 
 	return [buckets, posts]
