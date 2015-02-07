@@ -27,6 +27,23 @@
     font-style: normal;
 }
 
+@font-face {
+  font-family: DINPro;
+  src: url('../../assets/fonts/DINPro-Regular.otf');
+}
+
+@font-face {
+  font-family: DINPro;
+  font-weight: bold;
+  src: url('../../assets/fonts/DINPro-Bold.otf');
+}
+
+@font-face {
+  font-family: DINPro;
+  font-weight: 300;
+  src: url('../../assets/fonts/DINPro-Light.otf');
+}
+
 /**
  * App-wide Styles
  */
