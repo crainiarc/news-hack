@@ -9,7 +9,7 @@ angular.module('newsHackApp')
     });
 
     $http.get('/feed').success(function(json) {
-      console.log("Returned json " + json);
+      //console.log("Returned second json " + json[0]);
       $scope.validatePost = function(post) {
         var contentCount = 0;
         if (post.hasOwnProperty('picture')) {
@@ -35,12 +35,10 @@ angular.module('newsHackApp')
       // });
       var categories = [];
       var categoryPosts = [];
-      var hardCodedCats = ["Technology", "Game", "Asia", "Business", "World", "Others"];
       for (var key in json) {
         if (json.hasOwnProperty(key)) {
           var currentPost = json[key];
           if ($scope.validatePost(currentPost)) {
-            currentPost.category = hardCodedCats[Math.floor(Math.random() * 6)];
             var category = currentPost.category;
             if (categories.hasOwnProperty(category)) {
               categories[category] = categories[category] + 1;
@@ -48,13 +46,28 @@ angular.module('newsHackApp')
               categories[category] = 1;
               categoryPosts[category] = [];
             };
-            currentPost.importance = Math.floor(Math.random() * 10) % 3 + 1; 
 
             categoryPosts[category].push(currentPost);
           };
           
         }
       }
+
+      // for (var currentPost in json[0]) {
+      //   if ($scope.validatePost(currentPost)) {
+      //     console.log("validated");
+      //     var category = currentPost.category;
+      //     if (categories.hasOwnProperty(category)) {
+      //       categories[category] = categories[category] + 1;
+      //     } else {
+      //       categories[category] = 1;
+      //       categoryPosts[category] = [];
+      //     };
+
+      //     categoryPosts[category].push(currentPost);
+      //   } else {
+      //   }
+      // }
       var sortCategory = function() {
         for (var key in categories) {
           if (categories.hasOwnProperty(key)) {
