@@ -25,6 +25,10 @@ module.exports = function(app, passport) {
     failureRedirect : '/'
   }));
 
+  app.get('/profile', function(request, result) {
+    result.send(request.user.facebook.id + "asd1232" + request.user.facebook.name);
+  });
+
   // Profile ------------------------------------------------------------------
 
   // route middleware to make sure a user is logged in
@@ -55,7 +59,7 @@ module.exports = function(app, passport) {
 
   app.get('/cache', function(req, res) {
     var fs = require('fs');
-    var jsonObj = fs.readFileSync(__dirname+"/classifier/cache.json", "utf8");
+    var jsonObj = fs.readFileSync(__dirname+"/classifier/cache3.json", "utf8");
     res.json(jsonObj);
   });
 
