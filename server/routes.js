@@ -14,30 +14,15 @@ module.exports = function(app, passport) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
-  // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-   .get(errors[404]);
-
-  // All other routes should redirect to the index.html
-  app.route('/*')
-    .get(function(req, res) {
-      res.sendfile(app.get('appPath') + '/index.html');
-    });
-
   // Facebook Auth ------------------------------------------------------------
-  /*
   app.get('/auth/facebook', passport.authenticate('facebook', {
     scope : configAuth.facebookAuth.scope
-  }));*/
-
-  app.get('/auth/facebook', function(req, res, next) {
-    console.log("inside auth");
-  });
+  }));
 
   // handle the callback after facebook has authenticated the user
   app.get('/auth/facebook/callback',passport.authenticate('facebook', {
     successRedirect : '/profile',
-    failureRedirect : '/404profile'
+    failureRedirect : '/'
   }));
 
   // Profile ------------------------------------------------------------------
@@ -52,6 +37,10 @@ module.exports = function(app, passport) {
     // if they aren't redirect them to the home page
     res.redirect('/');
   }
+
+  // All undefined asset or api routes should return a 404
+  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+   .get(errors[404]);
 
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
@@ -68,5 +57,12 @@ module.exports = function(app, passport) {
   app.get('/pullmoidata', function(req, res) {
     fbpull(req.user, res);
   });
+
+  // All other routes should redirect to the index.html
+  app.route('/*')
+    .get(function(req, res) {
+      res.sendfile(app.get('appPath') + '/index.html');
+    });
+
 
 };
