@@ -4,20 +4,21 @@ body {
 }
 
 .fb-bar {
-    background-color: #4860A2;
+    background-color: rgb(59,89,153);
     height: 42px;
 }
 
 .navbar { margin-bottom: 0; }
 .navbar-nav > li > a:link,
 .navbar-nav > li > a:visited {
-    font: bold 12px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: bold 15px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #333333;
 }
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:active {
     color: #4860A2;
+    background: #fff;
 }
 
 .packery-sizer, .packery-object {
@@ -31,23 +32,12 @@ body {
     width: 530px;
 }
 
-.item-lg img {
-    width: 530px;
-}
 
 .item-md {
     width: 250px;
 }
 
-.item-md img{
-    width: 250px;
-}
-
 .item-sm {
-    width: 170px;
-}
-
-.item-sm img{
     width: 170px;
 }
 
@@ -78,4 +68,32 @@ body {
 .item-container > img {
     width: 100%;
     height: auto;
+}
+
+.header-content {
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+#thumbnail {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: top;
+    background-size:contain !important;
+    margin-top: 5px;
+    margin-left: 800px;
+}
+
+#user-name {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-left: 50px;
+    color: #fff;
 }

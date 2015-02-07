@@ -1,6 +1,19 @@
 <!-- <div ng-include="'components/navbar/navbar.html'"></div> -->
 
 <header class="fb-bar">
+  <div class="header-content">
+    <a href="https://www.facebook.com">
+      <img src="http://media.zenfs.com/en-US/video/video.pd2upload.com/video.yahoofinance.com@13830bf4-746a-3a29-840a-21efbc9207ce_FULL.jpg" height="32px" style="margin-top:5px;"/>
+    </a>
+    <a href="https://www.facebook.com/rick.qing.5" style="height: 32px;">
+      <div id="thumbnail" style="background:url('https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/c0.0.320.320/p320x320/10334388_702856806416773_6280638961670414912_n.jpg?oh=31a3c0ee2816dbc4b7ae8cc97f27e03a&oe=554969A4&__gda__=1432686260_6df13b4f334b57bb079d1ecaf91e5552') no-repeat;">
+      <div id="user-name"><span><b>Rick</b></span></div>
+    </a>
+    
+      
+    </div>
+    
+  </div>
 </header>
 <div class="container">
   <nav class="navbar">
@@ -16,14 +29,17 @@
   <packery class="col-lg-12" gutter="10" column-width="0" row-height="0" ng-repeat="category in categories" ng-if="category == currentCategory">
 
     <packery-object class="item-lg" ng-repeat="post in categoryPosts[category]" ng-class="post.importance == 1 ? 'item-sm' : (post.importance == 2 ? 'item-md' : 'item-lg')" >
+    <a href="{{post.link}}" target="_blank" ng-if="post.hasOwnProperty('link')" style="text-decoration: none;color: #000000;">
       <section class="item-container">
-        <img src="{{post.picture}}" />
-        <h1>{{post.name}}</h1>
-        <h2>By <img class="poster-pic" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/c55.55.685.685/s32x32/530919_10151150181583127_1094332567_n.jpg?oh=daa41e93600d9cd35d870c098b066be0&oe=5548A218&__gda__=1431703280_359573010ba0aeb4d1d02c6ecc2418d1" /> Keng-Kiat Lim</h2>
-        <p>{{post.description}}</p>
+        <img src="{{post.picture}}" ng-if="post.hasOwnProperty('picture')"/>
+        <h1 ng-if="post.hasOwnProperty('name')">{{post.name}}</h1>
+        
+        <p ng-if="post.hasOwnProperty('description')">{{post.description}}</p>
+        <p ng-if="!post.hasOwnProperty('description') && post.hasOwnProperty('message')">{{post.message}}</p>
       </section>
+    </a>
+      
     </packery-object>
-
   </packery>
 <div>
 
