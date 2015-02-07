@@ -102,6 +102,12 @@ angular.module('newsHackApp')
       $scope.changeCurrentCategory($scope.categories[0]);
     });
 
+    $http.get('/profile').success(function(userInfo) {
+      var userInfoArr = userInfo.split("asd1232");
+      $scope.currentUser = userInfoArr[0];
+      $scope.currentUserName = userInfoArr[1];
+    });
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;

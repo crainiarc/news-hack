@@ -25,6 +25,10 @@ module.exports = function(app, passport) {
     failureRedirect : '/'
   }));
 
+  app.get('/profile', function(request, result) {
+    result.send(request.user.facebook.id + "asd1232" + request.user.facebook.name);
+  });
+
   // Profile ------------------------------------------------------------------
 
   // route middleware to make sure a user is logged in
