@@ -3,7 +3,7 @@
 angular.module('newsHackApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/landingpage', {
+      .when('/', {
         templateUrl: 'app/landingpage/landingpage.html',
         controller: 'LandingpageCtrl'
       });

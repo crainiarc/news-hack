@@ -5,14 +5,24 @@ angular.module('newsHackApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap',
-  'angular-packery'
+  'ui.bootstrap'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
+      .when('/auth/facebook', {
+        redirectTo: '/auth/facebook'
+      })
+
+      .when('/auth/facebook/callback/:token', {
+        redirectTo: '/auth/facebook/callback/:token'
+      })
+
+      .when('/pullmoidata', {
+        redirectTo: '/pullmoidata'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
   });
