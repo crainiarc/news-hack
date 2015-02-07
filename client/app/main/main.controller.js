@@ -61,18 +61,22 @@ angular.module('newsHackApp')
       };
       sortCategory();
       $scope.categoryPosts = categoryPosts;
-      $scope.currentCategory = $scope.categories[0];
+      //$scope.currentCategory = "";
       $scope.changeCurrentCategory = function(currentCategory) {
         $scope.currentCategory = currentCategory;
       };
+      
     }
 
     $http.get('/feed').success(function(feedObj) {
+      //$scope.changeCurrentCategory($scope.categories[1]);
       $scope.loadPage(feedObj);
+      $scope.changeCurrentCategory($scope.categories[1]);
     });
 
     $http.get('/cache').success(function(feedObj) {
       $scope.loadPage(feedObj);
+      $scope.changeCurrentCategory($scope.categories[0]);
     });
 
     $scope.addThing = function() {
