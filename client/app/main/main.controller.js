@@ -37,6 +37,7 @@ angular.module('newsHackApp')
       var categoryPosts = [];
       for (var key in json) {
         if (json.hasOwnProperty(key)) {
+          console.log("Key is " + key);
           var currentPost = json[key];
           if ($scope.validatePost(currentPost)) {
             var category = currentPost.category;
