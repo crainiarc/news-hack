@@ -20,6 +20,10 @@ angular.module('newsHackApp', [
       .when('/pullmoidata', {
         redirectTo: '/pullmoidata'
       })
+
+      .when('/feed', {
+        redirectTo: '/feed'
+      })
       .otherwise({
         redirectTo: '/'
       });
