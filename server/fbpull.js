@@ -64,9 +64,8 @@ var fbpull = function(user, res) {
     secret: config.facebookAuth.appSecret
   }).setAccessToken(user.facebook.token);
   var urls = [
-    '/v2.2/me/home?limit=1000&since=2015-01-01'
+    '/v2.2/me/home?limit=2&since=2015-01-01'
   ];
-  console.log(options);
 
   var alldata = pulldata(urls, fb, {}, res,
     function(alldata, res) {
