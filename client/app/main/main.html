@@ -2,13 +2,13 @@
 
 <header class="fb-bar">
   <div class="header-content">
-    <a href="https://www.facebook.com">
+    <a class="fb-logo" href="https://www.facebook.com">
       <img src="http://media.zenfs.com/en-US/video/video.pd2upload.com/video.yahoofinance.com@13830bf4-746a-3a29-840a-21efbc9207ce_FULL.jpg" height="32px" style="margin-top:5px;"/>
     </a>
     <input type="text" placeholder="Search Facebook" class="fb-search-bar" />
     <a href="https://www.facebook.com/{{currentUser}}" style="height: 32px;">
-      <div id="thumbnail" style="background:url('http://graph.facebook.com/{{currentUser}}/picture?type=square') no-repeat;">
-      <div id="user-name"><span><b>{{currentUserName}}</b></span></div>
+      <span id="thumbnail" style="background:url('http://graph.facebook.com/{{currentUser}}/picture?type=square') no-repeat;"></span>
+      <span id="user-name"><span>{{currentUserName}}</span></span>
     </a>
     </div>
     

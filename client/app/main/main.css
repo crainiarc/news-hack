@@ -19,6 +19,7 @@ body {
 }
 
 .fb-search-bar {
+    padding-left: 7px;
     width: 550px;
     height: 26px;
     border-radius: 5px;
@@ -27,6 +28,9 @@ body {
     border: 0;
 }
 
+.fb-logo {
+    margin-left: 50px;
+}
 
 div.navbar {
     padding-top: 42px;
@@ -111,17 +115,25 @@ div.navbar {
     vertical-align: top;
     background-size:contain !important;
     margin-top: 5px;
-    margin-left: 800px;
+    margin-left: 100px;
 }
 
 #user-name {
     width: 100px;
     height: 32px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: bottom;
     margin-top: 5px;
-    margin-left: 50px;
+    margin-left: 10px;
     color: #fff;
+    font-size: 13px;
+    display: inline-block;
+}
+
+#user-name > span {
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 7px;
 }
 
 .poster-avatar {
