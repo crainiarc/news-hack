@@ -1,5 +1,9 @@
 from sets import Set
-import json, sys, subprocess, glob, math, datetime
+import json, sys, subprocess, glob, math, datetime, os
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 keywords_asia = Set([])
 keywords_trending = Set([])

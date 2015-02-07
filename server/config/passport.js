@@ -48,18 +48,19 @@ module.exports = function(passport) {
     // asynchronous
     process.nextTick(function() {
 
-      console.log("authenticating");
       // find the user in the database based on their facebook id
       User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 
         // if there is an error, stop everything and return that
         // ie an error connecting to the database
-        if (err)
+        if (err) {
           console.log("Error in passport", err);
           return done(err);
+        }
 
         // if the user is found, then log them in
         if (user) {
+          console.log("USER FOUND", user);
           return done(null, user); // user found, return that user
         } else {
           // if there is no user found with that facebook id, create them
@@ -80,6 +81,7 @@ module.exports = function(passport) {
           newUser.save(function(err) {
             if (err)
                 throw err;
+            console.log("newuser", newUser);
 
             // if successful, return the new user
             return done(null, newUser);
