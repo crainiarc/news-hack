@@ -7,6 +7,7 @@ body {
     height: 42px;
 }
 
+.navbar { margin-bottom: 0; }
 .navbar-nav > li > a:link,
 .navbar-nav > li > a:visited {
     font: bold 12px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -20,7 +21,7 @@ body {
 
 .packery-sizer, .packery-object {
     background-color: #FFFFFF;
-    border: 1px black solid;
-  width: 360px;
-  height: 500px;
+    border: 1px #D0D1D5 solid;
+    border-radius: 3px;
+    width: 360px;
 }
