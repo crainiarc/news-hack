@@ -64,7 +64,7 @@ var fbpull = function(user, res) {
     secret: config.facebookAuth.appSecret
   }).setAccessToken(user.facebook.token);
   var urls = [
-    '/v2.2/me/home?limit=1000&since=2015-01-01'
+    '/v2.2/me/home?limit=2&since=2015-01-01'
   ];
   console.log(options);
 
@@ -83,7 +83,7 @@ var fbpull = function(user, res) {
         // results is an array consisting of messages collected during execution 
         console.log('results: %j', results[0]);
 
-        res.json(results[0]);
+        res.json(JSON.stringify(results[0]));
       };
 
       PythonShell.run(config.pyscript, options, f);
