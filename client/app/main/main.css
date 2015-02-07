@@ -13,6 +13,8 @@ body {
 .navbar-nav > li > a:visited {
     font: bold 15px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #333333;
+    background: #fff;
+    outline: 0;
 }
 
 .navbar-nav > li > a:hover,
