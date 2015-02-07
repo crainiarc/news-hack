@@ -6,21 +6,28 @@ body {
 .fb-bar {
     background-color: rgb(59,89,153);
     height: 42px;
+    position: fixed;
+    z-index: 100;
 }
 
+
+div.navbar {
+    padding-top: 42px;
+}
 .navbar { margin-bottom: 0; }
+.navbar-nav > li > a,
 .navbar-nav > li > a:link,
 .navbar-nav > li > a:visited {
-    font: bold 15px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #333333;
-    background: #fff;
+    font: bold 13px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #141823;
+    background: transparent;
     outline: 0;
 }
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:active {
-    color: #4860A2;
-    background: #fff;
+    color: #141823;
+    background: transparent;
 }
 
 .packery-sizer, .packery-object {
