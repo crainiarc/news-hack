@@ -64,7 +64,19 @@ var fbpull = function(user, res) {
     secret: config.facebookAuth.appSecret
   }).setAccessToken(user.facebook.token);
   var urls = [
-    '/v2.2/me/home?limit=2&since=2015-01-01'
+    '/v2.2/me/home?limit=10000&since=2015-01-01',
+    '/v2.2/me/home?limit=10000&since=2014-01-01',
+    '/v2.2/me/home?limit=10000&since=2014-02-01',
+    '/v2.2/me/home?limit=10000&since=2014-03-01',
+    '/v2.2/me/home?limit=10000&since=2014-04-01',
+    '/v2.2/me/home?limit=10000&since=2014-05-01',
+    '/v2.2/me/home?limit=10000&since=2014-06-01',
+    '/v2.2/me/home?limit=10000&since=2014-07-01',
+    '/v2.2/me/home?limit=10000&since=2014-08-01',
+    '/v2.2/me/home?limit=10000&since=2014-09-01',
+    '/v2.2/me/home?limit=10000&since=2014-10-01',
+    '/v2.2/me/home?limit=10000&since=2014-11-01',
+    '/v2.2/me/home?limit=10000&since=2014-12-01',
   ];
 
   var alldata = pulldata(urls, fb, {}, res,

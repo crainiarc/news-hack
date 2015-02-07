@@ -39,15 +39,18 @@ angular.module('newsHackApp')
           //console.log("Key is " + key);
           var currentPost = $scope.json[key];
           if ($scope.validatePost(currentPost)) {
-            var category = currentPost.category;
-            if (categories.hasOwnProperty(category)) {
-              categories[category] = categories[category] + 1;
-            } else {
-              categories[category] = 1;
-              categoryPosts[category] = [];
-            };
-
-            categoryPosts[category].push(currentPost);
+            var categoryArr = currentPost.category;
+            var arrayLength = categoryArr.length;
+            for(var i = 0; i < arrayLength; i ++) {
+              if (categories.hasOwnProperty(categoryArr[i])) {
+                categories[categoryArr[i]] = categories[categoryArr[i]] + 1;
+              } else {
+                categories[categoryArr[i]] = 1;
+                categoryPosts[categoryArr[i]] = [];
+              };
+              categoryPosts[categoryArr[i]].push(currentPost);
+            }
+            
           };
         }
       }
@@ -76,14 +79,18 @@ angular.module('newsHackApp')
           //console.log("Key is " + key);
           var currentPost = $scope.json[key];
           if ($scope.validatePost(currentPost)) {
-            var category = currentPost.category;
-            if ($scope.categories.indexOf(category) <= -1) {
-              $scope.categories.push(category);
-              $scope.categoryPosts[category] = [];
-            } else {
-              console.log("New post in category " + category);
+            var categoryArr = currentPost.category;
+            var arrayLength = categoryArr.length;
+            for(var i = 0; i < arrayLength; i ++) {
+              if ($scope.categories.indexOf(categoryArr[i]) <= -1) {
+                $scope.categories.push(categoryArr[i]);
+                $scope.categoryPosts[categoryArr[i]] = [];
+              } else {
+                console.log("New post in category " + categoryArr[i]);
+              }
+              $scope.categoryPosts[categoryArr[i]].unshift(currentPost);
             }
-            $scope.categoryPosts[category].unshift(currentPost);
+            
           };
         }
       }
