@@ -170,7 +170,8 @@ def upgrade_img_res():
   for k in posts:
     post = posts[k]
     if "picture" in post and "url=" in post["picture"]:
-      post["picture"] = post["picture"].split("url=")[1]
+      new_link = post["picture"].split("url=")[1].replace('%3A',':').replace('%2F','/')
+      post["picture"] = new_link
 
 def run_cmd(cmd):
   print(cmd)
