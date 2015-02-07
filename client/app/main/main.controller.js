@@ -8,7 +8,7 @@ angular.module('newsHackApp')
       $scope.awesomeThings = awesomeThings;
     });
 
-    $http.get('/feed').success(function(feedObj) {
+    $http.get('/cache').success(function(feedObj) {
       //console.log("Returned second json " + json[0]);
       var json = JSON.parse(feedObj);
       $scope.validatePost = function(post) {
