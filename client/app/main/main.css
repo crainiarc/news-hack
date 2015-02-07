@@ -9,11 +9,18 @@ body {
 
 .navbar-nav > li > a:link,
 .navbar-nav > li > a:visited {
-    font: 36px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #4860A2;
+    font: bold 12px/1.3em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333333;
 }
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:active {
     color: #4860A2;
+}
+
+.packery-sizer, .packery-object {
+    background-color: #FFFFFF;
+    border: 1px black solid;
+  width: 360px;
+  height: 500px;
 }
