@@ -53,7 +53,7 @@ body {
 .item-container h2 {
     margin-top: 5px;
     font: 13px/1.3em 'Georgia', 'Times New Roman', Times, serif;
-    text-align: right;
+    color:#9197A3;
 }
 
 .item-container p {
@@ -96,4 +96,13 @@ body {
     margin-top: 5px;
     margin-left: 50px;
     color: #fff;
+}
+
+.poster-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: contain !important;
+    display: inline-block;
+    vertical-align: middle;
 }

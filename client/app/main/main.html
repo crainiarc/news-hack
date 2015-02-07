@@ -33,8 +33,7 @@
       <section class="item-container">
         <img src="{{post.picture}}" ng-if="post.hasOwnProperty('picture')"/>
         <h1 ng-if="post.hasOwnProperty('name')">{{post.name}}</h1>
-        <h2>By <img class="poster-pic" src="http://graph.facebook.com/{{post.from.id}}/picture?type=square"/> {{post.from.name}}</h2>
-
+        <h2>By <!-- <div class="poster-avatar" style="background:url('http://graph.facebook.com/{{post.from.id}}/picture?type=square') no-repeat;"> </div>  -->{{post.from.name}}</h2>
         <p ng-if="post.hasOwnProperty('description')">{{post.description}}</p>
         <p ng-if="!post.hasOwnProperty('description') && post.hasOwnProperty('message')">{{post.message}}</p>
       </section>
