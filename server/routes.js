@@ -59,7 +59,7 @@ module.exports = function(app, passport) {
 
   app.get('/cache', function(req, res) {
     var fs = require('fs');
-    var jsonObj = fs.readFileSync(__dirname+"/classifier/cache3.json", "utf8");
+    var jsonObj = fs.readFileSync(__dirname+"/classifier/cache.json", "utf8");
     res.json(jsonObj);
   });
 
