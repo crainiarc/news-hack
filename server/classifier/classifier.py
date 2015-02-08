@@ -169,10 +169,15 @@ def upgrade_img_res():
   # Update images
   for k in posts:
     post = posts[k]
-    if "picture" in post and "url=" in post["picture"]:
-      new_link = post["picture"].split("url=")[1]
-      new_link = urllib.parse.unquote(new_link)
-      post["picture"] = new_link
+    if "picture" in post:
+      if "url=" in post["picture"]:
+        new_link = post["picture"].split("url=")[1]
+        new_link = urllib.parse.unquote(new_link)
+        post["picture"] = new_link
+      if "src=" in post["picture"]:
+        new_link = post["picture"].split("src=")[1]
+        new_link = urllib.parse.unquote(new_link)
+        post["picture"] = new_link
 
 def run_cmd(cmd):
   print(cmd)
